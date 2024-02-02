@@ -1,0 +1,26 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+label, #numEmpleadosValue, #facturacionValue {
+    margin-right: 10px;
+}
+
+input[type="range"] {
+    margin: 0 10px 20px 0;
+    vertical-align: middle;
+}
+
+#responseArea {
+    background-color: #eee; 
+    border: 1px solid #ccc; /* Añadir borde para definir el área */
+    padding: 20px;
+    margin-top: 20px;
+    overflow-wrap: break-word; /* Asegura que el texto largo se ajuste correctamente */
+    max-width: 600px; /* Limitar el ancho máximo para una mejor lectura */
+    height: auto; /* Altura automática basada en el contenido */
+    overflow-y: auto; /* Permite desplazamiento vertical si es necesario */
+}

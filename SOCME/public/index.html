@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Información de la Empresa</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <h2>Crear Diagrama de la Empresa</h2>
+    <div>
+        <label for="numEmpleados">Número de Empleados:</label>
+        <input type="range" id="numEmpleados" name="numEmpleados" min="1" max="1000" value="50">
+        <span id="numEmpleadosValue">50</span>
+    </div>
+    <div>
+        <label for="facturacion">Facturación (en miles):</label>
+        <input type="range" id="facturacion" name="facturacion" min="10" max="10000" value="500">
+        <span id="facturacionValue">500</span>
+    </div>
+    <div>
+        <label for="actividad">Actividad:</label>
+        <select id="actividad" name="actividad">
+            <option value="Tecnología">Tecnología</option>
+            <option value="Manufactura">Manufactura</option>
+            <option value="Servicios">Servicios</option>
+        </select>
+    </div>
+    <button onclick="enviarDatos()">Enviar Datos</button>
+    
+    <div id="responseArea">
+        <h4>Respuesta:</h4>
+        <pre id="responseOutput"></pre>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
