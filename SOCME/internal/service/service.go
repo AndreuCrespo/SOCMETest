@@ -12,10 +12,12 @@ import (
 	"os"
 )
 
+var UltimaExplicacionChatGPT string // Variable global para almacenar la última explicación
+
 func GenerarExplicacionConOpenAI(ctx context.Context, info model.EmpresaInfo) (string, error) {
 	// Ajustando la estructura de la solicitud para el endpoint de chat
 	requestBody, err := json.Marshal(map[string]interface{}{
-		"model": "gpt-3.5-turbo",
+		"model": "gpt-4",
 		"messages": []map[string]string{
 			{"role": "system", "content": "Explica los siguientes datos de la empresa."},
 			{"role": "user", "content": fmt.Sprintf("Número de empleados: %d, Facturación: %.2f, Actividad: %s.", info.NumEmpleados, info.Facturacion, info.Actividad)},
@@ -44,7 +46,6 @@ func GenerarExplicacionConOpenAI(ctx context.Context, info model.EmpresaInfo) (s
 	}
 	defer resp.Body.Close()
 
-	// Verificación del código de estado HTTP
 	if resp.StatusCode >= 400 {
 		responseBody, _ := io.ReadAll(resp.Body)
 		log.Printf("Respuesta inesperada de OpenAI, código de estado: %d, estado: %s, cuerpo: %s", resp.StatusCode, resp.Status, string(responseBody))
@@ -57,13 +58,11 @@ func GenerarExplicacionConOpenAI(ctx context.Context, info model.EmpresaInfo) (s
 		return "", err
 	}
 
-	// Procesamiento de la respuesta
 	if choices, found := response["choices"].([]interface{}); found && len(choices) > 0 {
 		if choice, ok := choices[0].(map[string]interface{}); ok {
-			if messages, exists := choice["message"].(map[string]interface{}); exists {
-				if text, exists := messages["content"].(string); exists {
-					return text, nil
-				}
+			if text, exists := choice["content"].(string); exists {
+				UltimaExplicacionChatGPT = text // Almacenar la última explicación
+				return text, nil
 			}
 		}
 	}

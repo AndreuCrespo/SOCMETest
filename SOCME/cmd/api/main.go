@@ -13,6 +13,10 @@ func main() {
 
 	// API Handler para procesar la información de la empresa
 	r.HandleFunc("/empresa", handler.EmpresaHandler).Methods("POST")
+	r.HandleFunc("/descargar-pdf", handler.DescargarPDFHandler).Methods("GET")
+	// r.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+	// 	fmt.Fprintf(w, "Página de inicio")
+	// })
 
 	// Configuración para servir archivos estáticos desde el directorio /public
 	staticFileDirectory := http.Dir("./public/")
